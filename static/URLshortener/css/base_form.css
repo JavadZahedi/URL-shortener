@@ -1,0 +1,26 @@
+body {
+    direction: rtl;
+    font-family: Shabnam;
+}
+
+main {
+    background-image: url('../images/header_bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+}
+
+div.form-div {
+    max-width: 400px;
+    background-color: #9c9a9a6b;
+}
+
+div.form-div label {
+    color: white;
+    text-shadow: 2px 2px 4px grey;
+}
+
+input {
+    width: 95%;
+}

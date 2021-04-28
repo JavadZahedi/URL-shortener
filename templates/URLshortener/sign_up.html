@@ -1,0 +1,30 @@
+{% extends 'URLshortener/base_form.html' %}
+
+{% block head %} <title>Sign up</title> {% endblock %}
+
+{% block form_title %} ثبت نام {% endblock %}
+
+{% block form_body %}
+<form id='sign-up' class='mx-auto' method='post' action="{% url 'URLshortener:sign-up' %}">
+    {% csrf_token %}
+
+    {% for error in form.errors %}
+        <div class='alert alert-danger'>{{ error }}</div>
+    {% endfor %}
+
+    {% for field in form.visible_fields %}
+        <div class='row p-1'>
+            <div class='col-sm-5 text-right'>{{ field.label_tag }}</div>
+            <div class='col-sm-7 text-center'>{{ field }}</div>
+        </div>
+        
+        {% for error in field.errors %}
+            <div class='alert alert-danger'>{{ error }}</div>
+        {% endfor %}
+    {% endfor %}
+    <div class='text-center'>
+        <button type='submit' class='btn btn-success py-1 px-2'>ثبت نام</button>
+    </div>
+   
+</form>
+{% endblock %}

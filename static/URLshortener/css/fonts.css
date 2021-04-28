@@ -1,0 +1,19 @@
+@font-face {
+    font-family: Sahel;
+    src: url('../fonts/Sahel/Sahel.eot');
+    src: url('../fonts/Sahel/Sahel.eot?#iefix') format('../fonts/Sahel/Sahel-opentype'),
+         url('../fonts/Sahel/Sahel.woff') format('woff'),
+         url('../fonts/Sahel/Sahel.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+  
+@font-face {
+    font-family: Shabnam;
+    src: url('../fonts/Shabnam/Shabnam.eot');
+    src: url('../fonts/Shabnam/Shabnam.eot?#iefix') format('../fonts/Shabnam/Shabnam-opentype'),
+         url('../fonts/Shabnam/Shabnam.woff') format('woff'),
+         url('../fonts/Shabnam/Shabnam.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
