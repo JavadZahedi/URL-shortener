@@ -5,26 +5,39 @@
 {% block form_title %} ثبت نام {% endblock %}
 
 {% block form_body %}
-<form id='sign-up' class='mx-auto' method='post' action="{% url 'URLshortener:sign-up' %}">
-    {% csrf_token %}
-
-    {% for error in form.errors %}
-        <div class='alert alert-danger'>{{ error }}</div>
-    {% endfor %}
-
-    {% for field in form.visible_fields %}
-        <div class='row p-1'>
-            <div class='col-sm-5 text-right'>{{ field.label_tag }}</div>
-            <div class='col-sm-7 text-center'>{{ field }}</div>
+    {% if signed_up %}
+        <div class='text-right text-white'>
+            <p>ثبت نام شما با موفقیت انجام شد</p>
+            <a class='btn btn-info' href="{% url 'URLshortener:home' %}">بازگشت به صفحه اصلی</a>
+            <a class='btn btn-info' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
         </div>
-        
-        {% for error in field.errors %}
-            <div class='alert alert-danger'>{{ error }}</div>
-        {% endfor %}
-    {% endfor %}
-    <div class='text-center'>
-        <button type='submit' class='btn btn-success py-1 px-2'>ثبت نام</button>
-    </div>
-   
-</form>
+    {% else %}
+        <form id='sign-up' class='mx-auto p-3' method='post' action="{% url 'URLshortener:sign-up' %}">
+            {% csrf_token %}
+
+            {% for error in form.non_field_errors %}
+                <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
+                    <button type="button" class="close" data-dismiss="alert">&times; </button>
+                    <span>{{ error }}</span>
+                </div>
+            {% endfor %}
+
+            {% for field in form.visible_fields %}
+                <div class='row py-2'>
+                    <div class='col-sm-5 text-right'>{{ field.label_tag }}</div>
+                    <div class='col-sm-7 text-center'>{{ field }}</div>
+                </div>
+                
+                {% for error in field.errors %}
+                    <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
+                        <button type="button" class="close" data-dismiss="alert">&times; </button>
+                        <span>{{ error }}</span>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+            <div class='text-center pt-3'>
+                <button type='submit' class='btn btn-success py-1 px-2'>ثبت نام</button>
+            </div>
+        </form>
+    {% endif %}
 {% endblock %}
