@@ -53,21 +53,23 @@
 			<table class='table table-light table-striped table-borderless urls-table text-center p-0 mx-auto my-0'>
 				<thead>
 					<tr>
-						<th class='url-property'>ردیف</th>
-						<th class='url-property'>آدرس</th>
-						<th class='url-property'>بازدید</th>
-						<th class='url-property'>تاریخ ایجاد</th>
+						<th class='url-property p-2'>ردیف</th>
+						<th class='url-property p-2'>آدرس</th>
+						<th class='url-property p-2'>بازدید</th>
+						<th class='url-property p-2'>تاریخ ایجاد</th>
 					</tr>
 				</thead>
 				<tbody>
 					{% for short_url in short_urls %}
 					<tr>
-						<td>{{forloop.counter}}</td>
-						<td><a href="{% url 'URLshortener:shortened-url' short_url.slug%}">
+						<td class='p-2'>{{forloop.counter}}</td>
+						<td class='p-2'>
+							<a href="{% url 'URLshortener:shortened-url' short_url.slug%}">
 							{% url 'URLshortener:shortened-url' short_url.slug %}
-						</a></td>
-						<td>{{short_url.visits}}</td>
-						<td>{{short_url.created}}</td>
+							</a>
+						</td>
+						<td class='p-2'>{{short_url.visits}}</td>
+						<td class='p-2'>{{short_url.created}}</td>
 					</tr>
 					{% endfor %}
 					

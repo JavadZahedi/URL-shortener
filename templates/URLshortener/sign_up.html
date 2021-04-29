@@ -8,7 +8,8 @@
     {% if signed_up %}
         <div class='text-right text-white'>
             <p>ثبت نام شما با موفقیت انجام شد</p>
-            <a class='btn btn-info' href="{% url 'URLshortener:home' %}">بازگشت به صفحه اصلی</a>
+            <span>رفتن به: </span>
+            <a class='btn btn-info' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
             <a class='btn btn-info' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
         </div>
     {% else %}
