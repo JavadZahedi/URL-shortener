@@ -24,7 +24,6 @@ class UserForm(forms.ModelForm):
         return cleaned_data
 
 
-
 class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
@@ -37,6 +36,20 @@ class UserProfileForm(forms.ModelForm):
 class SignInForm(forms.Form):
     username = forms.CharField(max_length=255, label='نام کاربری')
     password = forms.CharField(max_length=255, widget=forms.PasswordInput, label='رمز عبور')
+
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        user = authenticate(username=username, password=password)
+        if user:
+            if user.is_active:
+                self.signed_in_user = user
+                return cleaned_data
+            else:
+                raise ValidationError('حساب کاربری شما فعال نیست')
+        else:
+            raise ValidationError('نام کاربری یا رمز عبور اشتباه است')
 
 
 class URLForm(forms.ModelForm):

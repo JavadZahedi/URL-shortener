@@ -1,0 +1,35 @@
+{% extends 'URLshortener/base_form.html' %}
+
+{% block head %} <title>Sign in</title> {% endblock %}
+
+{% block form_title %} ورود {% endblock %}
+
+{% block form_body %}
+    <form id='sign-in' class='mx-auto p-3' method='post' action="{% url 'URLshortener:sign-in' %}">
+        {% csrf_token %}
+
+        {% for error in form.non_field_errors %}
+            <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
+                <button type="button" class="close" data-dismiss="alert">&times; </button>
+                <span>{{ error }}</span>
+            </div>
+        {% endfor %}
+
+        {% for field in form.visible_fields %}
+            <div class='row py-2'>
+                <div class='col-sm-5 text-right'>{{ field.label_tag }}</div>
+                <div class='col-sm-7 text-center'>{{ field }}</div>
+            </div>
+            
+            {% for error in field.errors %}
+                <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
+                    <button type="button" class="close" data-dismiss="alert">&times; </button>
+                    <span>{{ error }}</span>
+                </div>
+            {% endfor %}
+        {% endfor %}
+        <div class='text-center pt-3'>
+            <button type='submit' class='btn btn-success py-1 px-2'>ورود</button>
+        </div>
+    </form>
+{% endblock %}

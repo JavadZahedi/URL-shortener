@@ -34,7 +34,6 @@ def sign_up(request):
             user.save()
             login(request, user)
             signed_up = True
-
     else:
         form = UserForm()
 
@@ -51,16 +50,9 @@ def sign_in(request):
 
     if request.method == 'POST':
         form = SignInForm(request.POST)
-        if form.is_valid():
-            user = authenticate(username=forms.username, password=forms.password)
-            if user:
-                if user.is_active:
-                    login(request, user)
-                    return redirect('URLshortener:dashboard')
-                else:
-                    messages.error(request, 'حساب کاربری شما فعال نیست')
-            else:
-                messages.error(request, 'نام کاربری یا رمز عبور اشتباه است')
+        if form.is_valid():        
+            login(request, form.signed_in_user)
+            return redirect('URLshortener:dashboard')         
     else:
         form = SignInForm()
 
