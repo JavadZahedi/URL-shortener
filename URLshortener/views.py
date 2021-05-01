@@ -4,7 +4,7 @@ from .models import URL
 from .forms import UserForm, UserProfileForm, SignInForm, URLForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from extensions.utils import generate_slug
+from extensions.slug_generation import generate_slug
 
 # Create your views here.
 
@@ -66,14 +66,24 @@ def dashboard(request):
 
 @login_required
 def add_url(request):
+    added = False
     if request.method == 'POST':
         form = URLForm(request.POST)
         if form.is_valid():
             slug = generate_slug()
             form.instance.slug = slug
+            form.instance.user = request.user
+            form.save()
+            added = True
+            return redirect('URLshortener:home')
     else:
         form = URLForm()
-    return render(request, 'URLshortener/add_url.html', {form:'form'})
+
+    context = {
+        'form': form,
+        'added': added,
+    }
+    return render(request, 'URLshortener/add_url.html', context)
 
 
 @login_required

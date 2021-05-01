@@ -1,17 +1,20 @@
 {% extends 'URLshortener/base_form.html' %}
 
-{% block head %} <title>Sign in</title> {% endblock %}
+{% block head %} <title>Add URL</title> {% endblock %}
 
-{% block form_title %} ورود {% endblock %}
+{% block form_title %}اضافه کردن URL {% endblock %}
 
 {% block form_body %}
-    <form id='sign-in' class='mx-auto p-3' method='post' action="{% url 'URLshortener:sign-in' %}">
+    {% if added %}
+    {% else %}
+    {% endif %}
+    <form id='add-url' class='mx-auto p-3' method='post' action="{% url 'URLshortener:add-url' %}">
         {% csrf_token %}
 
         {% for error in form.non_field_errors %}
             <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
-                {{ error }} 
-                <button type="button" class="close float-left" data-dismiss="alert">&times; </button>
+                <button type="button" class="close" data-dismiss="alert">&times; </button>
+                <span>{{ error }}</span>
             </div>
         {% endfor %}
 
@@ -23,13 +26,13 @@
             
             {% for error in field.errors %}
                 <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
-                    {{ error }} 
-                    <button type="button" class="close float-left" data-dismiss="alert">&times; </button>
+                    <button type="button" class="close" data-dismiss="alert">&times; </button>
+                    <span>{{ error }}</span>
                 </div>
             {% endfor %}
         {% endfor %}
         <div class='text-center pt-3'>
-            <button type='submit' class='btn btn-success py-1 px-2'>ورود</button>
+            <button type='submit' class='btn btn-success py-1 px-2'>اضافه کردن</button>
         </div>
     </form>
 {% endblock %}

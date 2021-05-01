@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import string
-import random
+from extensions.time_utils import datetime_to_jalali_str, date_to_jalali_str
 
 # create your managers here
 
@@ -20,8 +19,12 @@ class URL(models.Model):
         self.visits += 1
         self.save()
 
+    @property
+    def created_jalali(self):
+        return datetime_to_jalali_str(self.created)
+
     def __str__(self):
-        return self.slug
+        return 'localhost:8000/shortened-url/' + self.slug
 
 
 class UserProfile(models.Model):
@@ -29,5 +32,9 @@ class UserProfile(models.Model):
     birth_date = models.DateField(blank=True, verbose_name='تاریخ تولد')
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    @property
+    def birth_date_jalali(self):
+        return date_to_jalali_str(self.birth_date)
+
     def __str__(self):
-        return ' '.join(self.user.firstname, self.user.lastname)
+        return ' '.join(self.user.first_name, self.user.last_name)

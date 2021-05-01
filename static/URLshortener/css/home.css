@@ -25,6 +25,7 @@ nav li.nav-item:hover {
 
 main {
   background-image: linear-gradient(to right bottom, #35304d, #136617);
+  min-height: 50vh;
 }
 
 .header-title {

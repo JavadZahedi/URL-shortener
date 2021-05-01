@@ -6,15 +6,17 @@ from django.core.exceptions import ValidationError
 
 
 class UserForm(forms.ModelForm):
-    password = forms.CharField(max_length=255, widget=forms.PasswordInput, label='گذر واژه')
-    password_repeat = forms.CharField(max_length=255, widget=forms.PasswordInput,
+    password_repeat = forms.CharField(max_length=4096, widget=forms.PasswordInput,
                                       label='تکرار گذر واژه')
 
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', 'password']
+        widgets = {
+            'password': forms.PasswordInput,
+        }
 
-    def clean(self):
+    def clean_password(self):
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
         password_repeat = cleaned_data.get('password_repeat')
@@ -55,4 +57,4 @@ class SignInForm(forms.Form):
 class URLForm(forms.ModelForm):
     class Meta:
         model = URL
-        fields = ['address']
+        fields = ['address',]

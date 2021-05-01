@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load custom_filters %}
 <html>
 <head>
     <meta charset="UTF-8">
@@ -62,14 +63,14 @@
 				<tbody>
 					{% for short_url in short_urls %}
 					<tr>
-						<td class='p-2'>{{forloop.counter}}</td>
+						<td class='p-2'>{{ forloop.counter|to_persian }}</td>
 						<td class='p-2'>
 							<a href="{% url 'URLshortener:shortened-url' short_url.slug%}">
-							{% url 'URLshortener:shortened-url' short_url.slug %}
+							{{ short_url }}
 							</a>
 						</td>
-						<td class='p-2'>{{short_url.visits}}</td>
-						<td class='p-2'>{{short_url.created}}</td>
+						<td class='p-2'>{{ short_url.visits|to_persian }}</td>
+						<td class='p-2'>{{ short_url.created_jalali }}</td>
 					</tr>
 					{% endfor %}
 					
