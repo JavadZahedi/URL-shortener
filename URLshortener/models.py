@@ -23,8 +23,12 @@ class URL(models.Model):
         self.save()
 
     def last_visit_jalali(self):
-        return datetime_to_jalali_str(self.created)
+        return datetime_to_jalali_str(self.last_visit)
     last_visit_jalali.short_description = 'آخرین بازدید'
+
+    def created_jalali(self):
+        return datetime_to_jalali_str(self.created)
+    created_jalali.short_description = 'تاریخ ایجاد'
 
     def __str__(self):
         return 'localhost:8000/shortened-url/' + self.slug
