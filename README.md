@@ -6,7 +6,7 @@ This is a URL shortener web application. To run the project, do thos instruction
   git clone https://github.com/JavadZahedi/URL-shortener
   ```
 - open `URL-shortener` directory
-  `cd URL-shortener`
+  ```cd URL-shortener```
 - install `virtualenv` on your system if you haven't install it.
   `sudo apt-get install virtualenv`
 - make a virtual environment
