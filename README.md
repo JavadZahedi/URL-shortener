@@ -6,19 +6,33 @@ This is a URL shortener web application. To run the project, do thos instruction
   git clone https://github.com/JavadZahedi/URL-shortener
   ```
 - open `URL-shortener` directory
-  ```cd URL-shortener```
+  ```
+  cd URL-shortener
+  ```
 - install `virtualenv` on your system if you haven't install it.
-  `sudo apt-get install virtualenv`
+  ```
+  sudo apt-get install virtualenv
+  ```
 - make a virtual environment
-  `virtualenv <virtual_environment_name>`
+  ```
+  virtualenv <virtual_environment_name>
+  ```
 - activate the virtual environment
-  `source <virtual_environment_name>/bin/activate`
+  ```
+  source <virtual_environment_name>/bin/activate
+  ```
   you can deactivate it by running `deactivate` on the command line
 - install pip3 on your system or virtual environment
-  `sudo apt-get install pip3`
+  ```
+  sudo apt-get install pip3
+  ```
 - install required libraries and packages on your virtual environment
-  `pip3 install -r requirements.txt`
+  ```
+  pip3 install -r requirements.txt
+  ```
 - open `myproject` directory
-  `cd myproject`
+  ```
+  cd myproject
+  ```
 - run `./manage.py runserver` on command line to run the server.
 - now, the server has been ran on 8000 port of the localhost.
