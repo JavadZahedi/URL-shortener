@@ -4,3 +4,4 @@ from django.apps import AppConfig
 class UrlshortenerConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'URLshortener'
+    verbose_name = 'کوتاه کننده نشانی اینترنتی'

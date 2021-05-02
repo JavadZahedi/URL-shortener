@@ -8,9 +8,10 @@
     {% if signed_up %}
         <div class='text-right text-white'>
             <p>ثبت نام شما با موفقیت انجام شد</p>
-            <span>رفتن به: </span>
-            <a class='btn btn-info' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
-            <a class='btn btn-info' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
+            <span>رفتن به: </span> <br>
+            <a class='btn btn-info m-1' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
+            <br>
+            <a class='btn btn-info m-1' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
         </div>
     {% else %}
         <form id='sign-up' class='mx-auto p-3' method='post' action="{% url 'URLshortener:sign-up' %}">
@@ -25,8 +26,8 @@
 
             {% for field in form.visible_fields %}
                 <div class='row py-2'>
-                    <div class='col-sm-5 text-right'>{{ field.label_tag }}</div>
-                    <div class='col-sm-7 text-center'>{{ field }}</div>
+                    <div class='col-sm-5 text-right px-2'>{{ field.label_tag }}</div>
+                    <div class='col-sm-7 text-center px-2'>{{ field }}</div>
                 </div>
                 
                 {% for error in field.errors %}

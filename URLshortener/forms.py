@@ -6,8 +6,8 @@ from django.core.exceptions import ValidationError
 
 
 class UserForm(forms.ModelForm):
-    password_repeat = forms.CharField(max_length=4096, widget=forms.PasswordInput,
-                                      label='تکرار گذر واژه')
+    password_repeat = forms.CharField(max_length=128, widget=forms.PasswordInput,
+                                      label='تکرار گذرواژه')
 
     class Meta:
         model = User
@@ -16,13 +16,13 @@ class UserForm(forms.ModelForm):
             'password': forms.PasswordInput,
         }
 
-    def clean_password(self):
+    def clean(self):
         cleaned_data = super().clean()
         password = cleaned_data.get('password')
         password_repeat = cleaned_data.get('password_repeat')
 
         if password != password_repeat:
-            raise ValidationError('رمز عبور و تکرار آن با هم برابر نیستند!')
+            raise ValidationError('گذرواژه و تکرار آن با هم برابر نیستند!')
         return cleaned_data
 
 
@@ -36,8 +36,9 @@ class UserProfileForm(forms.ModelForm):
 
 
 class SignInForm(forms.Form):
-    username = forms.CharField(max_length=255, label='نام کاربری')
-    password = forms.CharField(max_length=255, widget=forms.PasswordInput, label='رمز عبور')
+    username = forms.CharField(max_length=128, label='نام کاربری')
+    password = forms.CharField(max_length=128, widget=forms.PasswordInput,
+                               label='گذرواژه')
 
     def clean(self):
         cleaned_data = super().clean()
@@ -51,10 +52,13 @@ class SignInForm(forms.Form):
             else:
                 raise ValidationError('حساب کاربری شما فعال نیست')
         else:
-            raise ValidationError('نام کاربری یا رمز عبور اشتباه است')
+            raise ValidationError('نام کاربری یا گذرواژه اشتباه است')
 
 
 class URLForm(forms.ModelForm):
+    shortened_url = forms.URLField(label='نشانی کوتاه شده', disabled=True,
+                                   required=False)
+
     class Meta:
         model = URL
-        fields = ['address',]
+        fields = ['address']

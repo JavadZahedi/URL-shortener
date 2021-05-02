@@ -5,9 +5,6 @@
 {% block form_title %}اضافه کردن URL {% endblock %}
 
 {% block form_body %}
-    {% if added %}
-    {% else %}
-    {% endif %}
     <form id='add-url' class='mx-auto p-3' method='post' action="{% url 'URLshortener:add-url' %}">
         {% csrf_token %}
 
@@ -18,21 +15,37 @@
             </div>
         {% endfor %}
 
-        {% for field in form.visible_fields %}
-            <div class='row py-2'>
-                <div class='col-sm-5 text-right'>{{ field.label_tag }}</div>
-                <div class='col-sm-7 text-center'>{{ field }}</div>
-            </div>
-            
-            {% for error in field.errors %}
-                <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
-                    <button type="button" class="close" data-dismiss="alert">&times; </button>
-                    <span>{{ error }}</span>
-                </div>
-            {% endfor %}
-        {% endfor %}
-        <div class='text-center pt-3'>
-            <button type='submit' class='btn btn-success py-1 px-2'>اضافه کردن</button>
+        
+        <div class='row py-2'>
+            <div class='col-sm-4 text-right px-2'>{{ form.address.label_tag }}</div>
+            <div class='col-sm-8 px-2'>{{ form.address }}</div>
         </div>
+        
+        {% for error in form.address.errors %}
+            <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
+                <button type="button" class="close" data-dismiss="alert">&times; </button>
+                <span>{{ error }}</span>
+            </div>
+        {% endfor %}
+        
+        
+        {% if added %}
+            <div class='row py-2'>
+                <div class='col-sm-4 text-right px-2'>{{ form.shortened_url.label_tag }}</div>
+                <div class='col-sm-8 px-2'>{{ form.shortened_url }}</div>
+            </div>
+            <div class='text-right text-white'>
+                <span>رفتن به: </span> <br>
+                <a class='btn btn-info m-1' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
+                <br>
+                <a class='btn btn-info m-1' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
+                <br>
+                <a class='btn btn-info m-1' href="{% url 'URLshortener:add-url' %}">کوتاه کردن نشانی دیگر</a>
+            </div>
+        {% else %}
+            <div class='text-center pt-3'>
+                <button type='submit' class='btn btn-success py-1 px-2'>کوتاه کردن</button>
+            </div>
+        {% endif %}
     </form>
 {% endblock %}

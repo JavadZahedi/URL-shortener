@@ -17,8 +17,8 @@
 
         {% for field in form.visible_fields %}
             <div class='row py-2'>
-                <div class='col-sm-5 text-right'>{{ field.label_tag }}</div>
-                <div class='col-sm-7 text-center'>{{ field }}</div>
+                <div class='col-sm-5 text-right px-2'>{{ field.label_tag }}</div>
+                <div class='col-sm-7 text-center px-2'>{{ field }}</div>
             </div>
             
             {% for error in field.errors %}

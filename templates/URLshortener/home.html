@@ -29,7 +29,7 @@
 					<a class="nav-link" href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
 				</li>
 				<li class="nav-item p-1 text-center">
-					<a class="nav-link" href="{% url 'URLshortener:add-url' %}">اضافه کردن URL</a>
+					<a class="nav-link" href="{% url 'URLshortener:add-url' %}">کوتاه کردن نشانی</a>
 				</li>
 				<li class="nav-item p-1 text-center">
 					<a class="nav-link" href="{% url 'URLshortener:sign-out' %}">خروج</a>
@@ -46,18 +46,18 @@
 			</ul>
 		{% endif %}
 		</nav>
-		<div class='text-right p-5 mt-5 text-white header-title'>کوتاه url گستر ایران زمین</div>
+		<div class='text-right p-5 mt-5 text-white header-title'>کوتاه نشانی اینترنتی گستر ایران زمین</div>
 	</header>
 	<main class='p-2'>
-		<div class='container text-center text-white main-title'>پر بازدید ترین لینک ها</div>
+		<div class='container text-center text-white main-title'>پر بازدید ترین نشانی های کوتاه شده</div>
 		<div class='container table-responsive p-0 my-2 mx-auto rounded table-div border'>
 			<table class='table table-light table-striped table-borderless urls-table text-center p-0 mx-auto my-0'>
 				<thead>
 					<tr>
 						<th class='url-property p-2'>ردیف</th>
-						<th class='url-property p-2'>آدرس</th>
-						<th class='url-property p-2'>بازدید</th>
-						<th class='url-property p-2'>تاریخ ایجاد</th>
+						<th class='url-property p-2'>نشانی کوتاه شده</th>
+						<th class='url-property p-2'>تعداد بازدید ها</th>
+						<th class='url-property p-2'>آخرین بازدید</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,7 +70,7 @@
 							</a>
 						</td>
 						<td class='p-2'>{{ short_url.visits|to_persian }}</td>
-						<td class='p-2'>{{ short_url.created_jalali }}</td>
+						<td class='p-2'>{{ short_url.last_visit_jalali }}</td>
 					</tr>
 					{% endfor %}
 					

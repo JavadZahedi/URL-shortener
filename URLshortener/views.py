@@ -72,10 +72,10 @@ def add_url(request):
         if form.is_valid():
             slug = generate_slug()
             form.instance.slug = slug
-            form.instance.user = request.user
-            form.save()
+            form.instance.author = request.user
+            url_obj = form.save()
+            form.fields['shortened_url'].initial = str(url_obj)
             added = True
-            return redirect('URLshortener:home')
     else:
         form = URLForm()
 
