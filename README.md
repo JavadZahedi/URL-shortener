@@ -1,5 +1,5 @@
 # URL-shortener
-This is a URL shortener web application. To run the project, do this instructions:
+This is a URL shortener web application. You can register and login into the site and shorten your desired urls. To run the project, do this instructions:
 - make a git repository and clone the project into `URL-shortener` directory:
   ```
   git init
