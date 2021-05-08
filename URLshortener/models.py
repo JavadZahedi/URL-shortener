@@ -41,10 +41,15 @@ class URL(models.Model):
 class UserProfile(models.Model):
     photo = models.ImageField(upload_to='profile_images', verbose_name='تصویر')
     birth_date = models.DateField(blank=True, verbose_name='تاریخ تولد')
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def birth_date_jalali(self):
         return date_to_jalali_str(self.birth_date)
+    birth_date_jalali.short_description = 'تاریخ تولد'
 
     def __str__(self):
-        return ' '.join(self.user.first_name, self.user.last_name)
+        return self.user.username
+
+    class Meta:
+        verbose_name = 'پروفایل'
+        verbose_name_plural = 'پروفایل ها'

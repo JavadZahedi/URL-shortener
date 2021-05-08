@@ -1,0 +1,35 @@
+{% extends 'URLshortener/base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% load custom_tags %}
+
+{% block head %}
+	<link rel='stylesheet' href="{% static 'URLshortener/css/dashboard.css' %}">
+	<title> Dashboard </title>
+{% endblock %}
+
+
+{% block main %}
+    <div class='row container-fluid p-0 m-0'>
+        <aside class='col-sm-3 bg-dark p-0'>
+            {% if user.profile.photo.url %}
+            <div class='p-2'>
+                <img class='w-100 p-2 rounded-circle img-thumbnail' src='{{ user.profile.photo.url }}'>
+            </div>
+            {% endif %}
+            <ul class='nav flex-column text-center text-white p-0'>
+                <li class="nav-item p-2"><a href="{% url 'URLshortener:home' %}" >صفحه اصلی</a></li>
+                <li class="nav-item p-2"><a href="{% url 'URLshortener:add-url' %}" >اضافه کردن نشانی</a></li>
+                <li class="nav-item p-2"><a href="#" >ویرایش اطلاعات</a></li>
+                <li class="nav-item p-2"><a href="{% url 'URLshortener:sign-out' %}" >خروج</a></li>
+            </ul>
+        </aside>
+        <div class='col-sm-9 p-2'>
+            <div class='container text-center text-white main-title'>نشانی های اضافه شده</div>
+            <div class='container table-responsive p-0 my-2 mx-auto rounded table-div border'>
+                {% urls_table short_urls %}
+            </div>
+            {% paginator short_urls %}
+        </div>
+    </div>
+{% endblock %}

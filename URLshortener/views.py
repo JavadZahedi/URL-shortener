@@ -4,13 +4,18 @@ from .models import URL
 from .forms import UserForm, UserProfileForm, SignInForm, URLForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 from extensions.slug_generation import generate_slug
 
 # Create your views here.
 
 def home(request):
+    url_list = URL.objects.order_by('-visits')
+    paginator = Paginator(url_list, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
     context = {
-        'short_urls': URL.objects.order_by('-visits'),
+        'short_urls': page_obj,
     }
     return render(request, 'URLshortener/home.html', context)
 
@@ -61,7 +66,14 @@ def sign_in(request):
 
 @login_required
 def dashboard(request):
-    return render(request, 'URLshortener/dashboard.html', {})
+    url_list = request.user.urls.order_by('-visits')
+    paginator = Paginator(url_list, 10)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'short_urls': page_obj,
+    }
+    return render(request, 'URLshortener/dashboard.html', context)
 
 
 @login_required

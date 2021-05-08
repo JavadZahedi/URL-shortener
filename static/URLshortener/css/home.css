@@ -1,16 +1,3 @@
-body {
-	direction: rtl;
-  font-family: Sahel;
-}
-
-header {
-  background-image: url('../images/header_bg.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  min-height: 50vh;
-}
-
 nav {
   background-color: #66646493;
 }
@@ -23,11 +10,6 @@ nav li.nav-item:hover {
   background-color: #666464af;
 }
 
-main {
-  background-image: linear-gradient(to right bottom, #35304d, #136617);
-  min-height: 50vh;
-}
-
 .header-title {
   font-size: 50px;
 }
@@ -35,13 +17,4 @@ main {
 .main-title {
   font-family: Shabnam;
   font-size: 20px;
-}
-
-.url-property {
-  background-color: #6d238f;
-  color: white;
-}
-
-.urls-table {
-  min-width: 400px;
 }

@@ -1,28 +1,15 @@
-<!DOCTYPE html>
+{% extends 'URLshortener/base.html' %}
 {% load static %}
 {% load custom_filters %}
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-	<link rel='stylesheet' href="{% static 'URLshortener/css/fonts.css' %}">
+{% load custom_tags %}
+
+{% block head %}
 	<link rel='stylesheet' href="{% static 'URLshortener/css/home.css' %}">
+	<title> Home </title>
+{% endblock %}
 
-	<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-	<!-- Popper JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-
-	<!-- Latest compiled JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <title>Home</title>
-</head>
-<body>
-	<header class='container-fluid p-0'>
-		<nav class='navbar navbar-expand p-0'>
+{% block header %}
+	<nav class='navbar navbar-expand p-0'>
 		{% if user.is_authenticated %}
 			<ul class="navbar-nav p-0 m-0">
 				<li class="nav-item p-1 text-center">
@@ -45,41 +32,16 @@
 				</li>
 			</ul>
 		{% endif %}
-		</nav>
-		<div class='text-right p-5 mt-5 text-white header-title'>کوتاه نشانی اینترنتی گستر ایران زمین</div>
-	</header>
-	<main class='p-2'>
+	</nav>
+	<div class='text-right p-5 text-white header-title'>کوتاه نشانی اینترنتی گستر ایران زمین</div>
+{% endblock %}
+
+{% block main %}
+	<div class='container-fluid p-2'>
 		<div class='container text-center text-white main-title'>پر بازدید ترین نشانی های کوتاه شده</div>
 		<div class='container table-responsive p-0 my-2 mx-auto rounded table-div border'>
-			<table class='table table-light table-striped table-borderless urls-table text-center p-0 mx-auto my-0'>
-				<thead>
-					<tr>
-						<th class='url-property p-2'>ردیف</th>
-						<th class='url-property p-2'>نشانی کوتاه شده</th>
-						<th class='url-property p-2'>تعداد بازدید ها</th>
-						<th class='url-property p-2'>آخرین بازدید</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for short_url in short_urls %}
-					<tr>
-						<td class='p-2'>{{ forloop.counter|to_persian }}</td>
-						<td class='p-2'>
-							<a href="{% url 'URLshortener:shortened-url' short_url.slug%}">
-							{{ short_url }}
-							</a>
-						</td>
-						<td class='p-2'>{{ short_url.visits|to_persian }}</td>
-						<td class='p-2'>{{ short_url.last_visit_jalali }}</td>
-					</tr>
-					{% endfor %}
-					
-				</tbody>
-			</table>
+			{% urls_table short_urls %}
 		</div>
-
-	</main>
-	<footer></footer>
-    
-</body>
-</html>
+		{% paginator short_urls %}
+	</div>
+{% endblock %}

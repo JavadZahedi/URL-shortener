@@ -1,0 +1,16 @@
+.main-title {
+    font-family: Shabnam;
+    font-size: 20px;
+}
+
+.nav-item a {
+    color: white;
+}
+
+.nav-item a:hover {
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    background-color: #494848;
+}

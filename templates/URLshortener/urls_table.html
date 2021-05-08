@@ -1,0 +1,29 @@
+{% load custom_filters %}
+
+<table class='table table-light table-striped table-borderless text-center p-0 mx-auto my-0'>
+    <thead>
+        <tr style='background-color: #6d238f;' class='text-white'>
+            <th class='p-2'>ردیف</th>
+            <th class='p-2'>نشانی کوتاه شده</th>
+            <th class='p-2'>تعداد بازدید ها</th>
+            <th class='p-2'>آخرین بازدید</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for short_url in page %}
+        <tr>
+            <td class='p-2'>
+                {{ forloop.counter0|add:page.start_index|to_persian }}
+            </td>
+            <td class='p-2'>
+                <a href="{% url 'URLshortener:shortened-url' short_url.slug%}">
+                {{ short_url }}
+                </a>
+            </td>
+            <td class='p-2'>{{ short_url.visits|to_persian }}</td>
+            <td class='p-2'>{{ short_url.last_visit_jalali }}</td>
+        </tr>
+        {% endfor %}
+        
+    </tbody>
+</table>
