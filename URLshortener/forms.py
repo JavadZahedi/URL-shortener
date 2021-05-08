@@ -16,8 +16,8 @@ class UserForm(forms.ModelForm):
             'password': forms.PasswordInput,
         }
 
-    def clean(self):
-        cleaned_data = super().clean()
+    def clean_password_repeat(self):
+        cleaned_data = self.clean()
         password = cleaned_data.get('password')
         password_repeat = cleaned_data.get('password_repeat')
 
