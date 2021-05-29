@@ -23,7 +23,7 @@ def home(request):
 def shortened_url(request, slug):
     short_url = get_object_or_404(URL, slug=slug)
     short_url.increase_visits()
-    return HttpResponseRedirect(short_url.address)
+    return redirect(short_url.address, permanant=True)
 
 
 def sign_up(request):
@@ -55,9 +55,18 @@ def sign_in(request):
 
     if request.method == 'POST':
         form = SignInForm(request.POST)
-        if form.is_valid():        
-            login(request, form.signed_in_user)
-            return redirect('URLshortener:dashboard')         
+        if form.is_valid():
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+            user = authenticate(username=username, password=password)
+            if user:
+                if user.is_active:
+                    login(request, user)
+                    return redirect('URLshortener:dashboard')
+                else:
+                    form.add_error(None, ValidationError('حساب کاربری شما فعال نیست'))
+            else:
+                form.add_error(None, ValidationError('نام کاربری یا گذرواژه اشتباه است'))
     else:
         form = SignInForm()
 
@@ -82,8 +91,7 @@ def add_url(request):
     if request.method == 'POST':
         form = URLForm(request.POST)
         if form.is_valid():
-            slug = generate_slug()
-            form.instance.slug = slug
+            form.instance.slug = generate_slug()
             form.instance.author = request.user
             url_obj = form.save()
             form.fields['shortened_url'].initial = str(url_obj)

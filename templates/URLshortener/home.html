@@ -42,6 +42,8 @@
 		<div class='container table-responsive p-0 my-2 mx-auto rounded table-div border'>
 			{% urls_table short_urls %}
 		</div>
-		{% paginator short_urls %}
+		{% if short_urls.paginator.num_pages > 1 %}
+			{% paginator short_urls %}
+		{% endif %}
 	</div>
 {% endblock %}
