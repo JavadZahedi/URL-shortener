@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'URLshortener.apps.UrlshortenerConfig',
     'extensions',
+    'registration',
 ]
 
 MIDDLEWARE = [
@@ -130,9 +131,19 @@ STATICFILES_DIRS = [STATIC_DIR,]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = MEDIA_DIR
 
-LOGIN_URL = '/sign-up'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# django-registration-redux settings
+
+REGISTRATION_OPEN = True
+
+ACCOUNT_ACTIVATION_DAYS = 3
+
+REGISTRATION_AUTO_LOGIN = True
+
+LOGIN_REDIRECT_URL = '/dashboard/'
+
+LOGIN_URL = '/accounts/login/'

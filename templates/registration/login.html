@@ -1,11 +1,11 @@
 {% extends 'URLshortener/base_form.html' %}
 
-{% block head %} <title>Sign in</title> {% endblock %}
+{% block head %} <title>Login</title> {% endblock %}
 
 {% block form_title %} ورود {% endblock %}
 
 {% block form_body %}
-    <form id='sign-in' class='mx-auto p-3' method='post' action="{% url 'URLshortener:sign-in' %}">
+    <form id='sign-in' class='mx-auto p-2' method='post' action="{% url 'auth_login' %}">
         {% csrf_token %}
 
         {% for error in form.non_field_errors %}
@@ -16,7 +16,7 @@
         {% endfor %}
 
         {% for field in form.visible_fields %}
-            <div class='row py-2'>
+            <div class='row p-1'>
                 <div class='col-sm-5 text-right px-2'>{{ field.label_tag }}</div>
                 <div class='col-sm-7 text-center px-2'>{{ field }}</div>
             </div>
@@ -28,8 +28,12 @@
                 </div>
             {% endfor %}
         {% endfor %}
-        <div class='text-center pt-3'>
+        <div class='text-center p-2'>
             <button type='submit' class='btn btn-success py-1 px-2'>ورود</button>
+        </div>
+        <div class='text-right alert alert-info p-2 m-1'>
+            <span class='small'>هنوز ثبت نام نکرده اید؟</span>
+            <a class='btn btn-link small m-0 py-0 px-2' href="{% url 'registration_register' %}">ثبت نام</a>
         </div>
     </form>
 {% endblock %}

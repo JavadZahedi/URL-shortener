@@ -1,0 +1,15 @@
+{% extends 'URLshortener/base_form.html' %}
+
+{% block head %} <title>Register complete</title> {% endblock %}
+
+{% block form_title %} ثبت نام {% endblock %}
+
+{% block form_body %}
+    <div class='text-right text-white'>
+        <p>ثبت نام شما با موفقیت انجام شد</p>
+        <span>رفتن به: </span> <br>
+        <a class='btn btn-info m-1' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
+        <br>
+        <a class='btn btn-info m-1' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
+    </div>
+{% endblock %}

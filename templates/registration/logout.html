@@ -1,0 +1,15 @@
+{% extends 'URLshortener/base_form.html' %}
+
+{% block head %} <title>Logout</title> {% endblock %}
+
+{% block form_title %} خروج {% endblock %}
+
+{% block form_body %}
+    <div class='text-right text-white'>
+        <p>شما از سامانه خارج شدید</p>
+        <span>رفتن به: </span> <br>
+        <a class='btn btn-info m-1' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
+        <br>
+        <a class='btn btn-info m-1' href="{% url 'auth_login' %}">ورود</a>
+    </div>
+{% endblock %}
