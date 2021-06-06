@@ -1,0 +1,20 @@
+{% extends 'URLshortener/base_form.html' %}
+
+{% block head %} <title>User Profile</title> {% endblock %}
+
+{% block form_title %} تکمیل پروفایل {% endblock %}
+
+{% block form_id %} profile {% endblock %}
+
+{% block form_action %} {% url 'URLshortener:profile-completion' %} {% endblock %}
+
+{% block form_enctype %}multipart/form-data{% endblock %}
+
+{% block submit_value %} اتمام ثبت نام {% endblock %}
+
+{% block additional_content %}
+    <div class='alert alert-info alert-dismissable text-right small p-2 my-1 mx-auto'>
+        تکمیل اطلاعات بالا الزامی نیست و تنها برای کامل تر شدن پنل کاربری شماست
+        <button type="button" class="close float-left" data-dismiss="alert">&times; </button>
+    </div>
+{% endblock %}

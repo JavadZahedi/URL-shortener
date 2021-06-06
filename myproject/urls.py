@@ -14,14 +14,19 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, reverse_lazy
 from django.conf import settings
 from django.conf.urls.static import static
+from registration.backends.simple.views import RegistrationView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('URLshortener.urls')),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/register', 
+        RegistrationView.as_view(success_url=reverse_lazy('URLshortener:profile-completion')),
+        name='registration_register'),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

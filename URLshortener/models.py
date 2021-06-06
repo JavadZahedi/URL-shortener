@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
+
 from extensions.time_utils import datetime_to_jalali_str, date_to_jalali_str
 
 # create your managers here
@@ -39,8 +40,9 @@ class URL(models.Model):
 
 
 class UserProfile(models.Model):
-    photo = models.ImageField(upload_to='profile_images', verbose_name='تصویر')
+    photo = models.ImageField(blank=True, upload_to='profile_images', verbose_name='تصویر')
     birth_date = models.DateField(blank=True, verbose_name='تاریخ تولد')
+    website = models.URLField(blank=True, verbose_name='وب سایت')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def birth_date_jalali(self):

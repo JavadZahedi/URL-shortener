@@ -1,0 +1,13 @@
+{% extends 'URLshortener/base_form.html' %}
+
+{% block head %} <title>User Profile</title> {% endblock %}
+
+{% block form_title %} تغییر پروفایل {% endblock %}
+
+{% block form_id %} profile {% endblock %}
+
+{% block form_action %} {% url 'URLshortener:edit-profile' %} {% endblock %}
+
+{% block form_enctype %}multipart/form-data{% endblock %}
+
+{% block submit_value %} ذخیره {% endblock %}
