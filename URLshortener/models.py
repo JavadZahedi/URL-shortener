@@ -32,7 +32,7 @@ class URL(models.Model):
     created_jalali.short_description = 'تاریخ ایجاد'
 
     def __str__(self):
-        return 'localhost:8000/shortened-url/' + self.slug
+        return '/shortened-url/{}'.format(self.slug)
 
     class Meta:
         verbose_name = 'نشانی اینترنتی'
