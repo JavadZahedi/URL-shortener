@@ -1,20 +1,28 @@
 nav {
-  background-color: #66646493;
+  font-family: Sahel;
+  background-color: #77777757;
 }
 
 nav a.nav-link {
-  color: white;
+  color: white !important;
 }
 
 nav li.nav-item:hover {
-  background-color: #666464af;
+  background-color: #49484875;
 }
 
 .header-title {
+  font-family: Lalezar;
   font-size: 50px;
 }
 
+@media screen and (max-width: 350px) {
+  .header-title {
+    font-size: 35px;
+  }
+}
+
 .main-title {
-  font-family: Shabnam;
   font-size: 20px;
+  background-color: #77777757;
 }

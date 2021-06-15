@@ -15,25 +15,34 @@
             </div>
         {% endfor %}
 
-        
-        <div class='row p-1'>
-            <div class='col-sm-4 text-right px-2'>{{ form.address.label_tag }}</div>
-            <div class='col-sm-8 px-2'>{{ form.address }}</div>
-        </div>
-        
-        {% for error in form.address.errors %}
-            <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
-                {{ error }} 
-                <button type="button" class="close float-left" data-dismiss="alert">&times; </button>
-            </div>
+        {% for field in form.visible_fields %}
+            {% if field != form.shortened_url %}
+                <div class='row p-1'>
+                    <div class='col-sm-5 text-right px-2'>{{ field.label_tag }}</div>
+                    <div class='col-sm-7 text-center px-2'>{{ field }}</div>
+                </div>
+                
+                {% for error in field.errors %}
+                    <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
+                        {{ error }} 
+                        <button type="button" class="close float-left" data-dismiss="alert">&times; </button>
+                    </div>
+                {% endfor %}
+            {% endif %}
         {% endfor %}
         
-        
         {% if added %}
-            <div class='row p-1'>
-                <div class='col-sm-4 text-right px-2'>{{ form.shortened_url.label_tag }}</div>
-                <div class='col-sm-8 px-2'>{{ form.shortened_url }}</div>
+            <div class='p-2'>
+                <div class='text-right p-0'>{{ form.shortened_url.label_tag }}</div>
+                <div class='row'>
+                    <div id='shortened-url' class='col-sm-8 px-1'>{{ form.shortened_url }}</div>
+                    <div class='col-sm-4 px-1'>
+                        <input id='copy-btn' type='button' value='کپی کردن'
+                        class='btn btn-primary btn-block p-0'>
+                    </div>
+                </div>
             </div>
+            
             <div class='text-right text-white'>
                 <span>رفتن به: </span> <br>
                 <a class='btn btn-info m-1' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
@@ -44,8 +53,19 @@
             </div>
         {% else %}
             <div class='text-center p-2'>
-                <button type='submit' class='btn btn-success py-1 px-2'>کوتاه کردن</button>
+                <button type='submit' class='btn btn-primary py-1 px-2'>کوتاه کردن</button>
             </div>
         {% endif %}
     </form>
+
+    <script>
+        $(function() {
+            $('#copy-btn').click(function() {
+                var $field = $('#id_shortened_url');
+                $field.select();
+                //$field.setSelectionRange(0, 99999);
+                document.execCommand("copy");
+            })
+        })
+    </script>
 {% endblock %}

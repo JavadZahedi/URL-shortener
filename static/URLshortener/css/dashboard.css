@@ -1,10 +1,11 @@
 .main-title {
-    font-family: Shabnam;
     font-size: 20px;
-}
+    background-color: #77777757;
+  }
 
 .nav-item a {
     color: white;
+    font-family: Sahel;
 }
 
 .nav-item a:hover {
@@ -12,5 +13,11 @@
 }
 
 .nav-item:hover {
-    background-color: #494848;
+    background-color: #49484875;
+}
+
+.user-info {
+    font-size: 15px;
+    font-family: Shabnam;
+    background-color: #77777757;
 }

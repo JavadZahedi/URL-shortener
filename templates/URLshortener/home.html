@@ -9,9 +9,15 @@
 {% endblock %}
 
 {% block header %}
-	<nav class='navbar navbar-expand p-0'>
-		{% if user.is_authenticated %}
-			<ul class="navbar-nav p-0 m-0">
+	<nav class='navbar navbar-expand-sm navbar-dark p-0'>
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			<span class="navbar-toggler-icon text-white"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav text-center p-0 m-0">
+			{% if user.is_authenticated %}
 				<li class="nav-item p-1 text-center">
 					<a class="nav-link" href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
 				</li>
@@ -21,36 +27,40 @@
 				<li class="nav-item p-1 text-center">
 					<a class="nav-link" href="{% url 'auth_logout' %}?next=/">خروج</a>
 				</li>
-			</ul>
-		{% else %}
-			<ul class="navbar-nav p-0 m-0">
+			{% else %}
 				<li class="nav-item p-1 text-center">
 					<a class="nav-link" href="{% url 'registration_register' %}">ثبت نام</a>
 				</li>
 				<li class="nav-item p-1 text-center">
 					<a class="nav-link" href="{% url 'auth_login' %}">ورود</a>
 				</li>
+			{% endif %}
+				<li class="nav-item p-1 text-center">
+					<a class="nav-link" href="#">درباره ما</a>
+				</li>
 			</ul>
-		{% endif %}
+		</div>
 	</nav>
-	<div class='text-right p-5 text-white header-title'>کوتاه نشانی اینترنتی گستر ایران زمین</div>
+	<div class='row container-fluid text-right p-5 text-white header-title'>
+		کوتاه نشانی اینترنتی گستر ایران زمین
+	</div>
 {% endblock %}
 
 {% block main %}
 	<div class='container-fluid p-2'>
-		<div class='container text-center text-white main-title'>پر بازدید ترین نشانی های کوتاه شده</div>
-		{% if page_obj %}
-			<div class='container table-responsive p-0 my-2 mx-auto rounded table-div border'>
-				{% urls_table page_obj %}
-			</div>
-		{% else %}
-			<div class='alert alert-info text-right p-2 m-2 mx-auto'>
-				هنوز هیچ نشانی ای اضافه نشده است!
-			</div>
-		{% endif %}
+		<div class='container-fluid text-center text-white p-2 main-title'>پر بازدید ترین نشانی های کوتاه شده</div>
+		<div class='container'>
+			{% if page_obj %}
+				{% url_cards page_obj %}
+			{% else %}
+				<div class='alert alert-info text-right p-2 m-2 mx-auto'>
+					هنوز هیچ نشانی ای اضافه نشده است!
+				</div>
+			{% endif %}
 
-		{% if is_paginated %}
-			{% paginator page_obj %}
-		{% endif %}
+			{% if is_paginated %}
+				{% paginator page_obj %}
+			{% endif %}
+		</div>
 	</div>
 {% endblock %}

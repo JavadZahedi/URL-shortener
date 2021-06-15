@@ -1,15 +1,28 @@
 body {
 	direction: rtl;
-    font-family: Sahel;
-    background-image: linear-gradient(to right bottom, #35304d, #136617);
+    font-family: Lalezar;
+    background-image: url('../images/header_bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+}
+
+header {
+    /*background-image: url('../images/header_bg.jpg');*/
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
 
-header {
-    background-image: url('../images/header_bg.jpg');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}    
+.cards-div {
+    font-family: Sahel;
+}
+
+.url-card {
+    max-width: 200px;
+}
+
+.url-number {
+    font-family: Lalezar;
+}

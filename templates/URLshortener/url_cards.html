@@ -1,0 +1,31 @@
+{% load custom_filters %}
+
+<div class='container-fluid m-0 p-2 d-flex flex-row flex-wrap justify-content-center cards-div'>
+    {% for short_url in page %}
+    <div class='card text-right m-2 p-2 url-card'>
+        <h4 class='text-center p-0 m-0 url-number'>
+            <span class='badge badge-pill badge-primary'>
+                {{ forloop.counter0|add:page.start_index|to_persian }}
+            </span>
+        </h4>
+        <hr class='m-1'>
+
+        <div class='p-1'>
+            <span class='badge badge-info p-2'>{{ short_url.visits|to_persian }} بازدید</span>
+            <span></span>
+            <span class='badge badge-success p-2'>{{ short_url.label }}</span>
+        </div>
+
+        <div class='p-1'>آخرین بازدید:</div>
+        <div class='text-center'>
+            <span class='badge badge-secondary p-2'>{{ short_url.last_visit_jalali }}</span>
+        </div>
+
+        <div class='p-1'>آدرس:</div>
+        <a class='btn btn-link d-block p-0' href="{% url 'URLshortener:shortened-url' short_url.slug %}">
+            {{ short_url }}
+        </a>
+
+    </div>
+    {% endfor %}
+</div>

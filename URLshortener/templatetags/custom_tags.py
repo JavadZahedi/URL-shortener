@@ -8,8 +8,8 @@ def paginator(page):
         'page': page,
     }
 
-@register.inclusion_tag('URLshortener/urls_table.html')
-def urls_table(page):
+@register.inclusion_tag('URLshortener/url_cards.html')
+def url_cards(page):
     return {
         'page': page,
     }

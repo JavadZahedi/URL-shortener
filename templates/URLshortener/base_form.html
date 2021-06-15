@@ -28,7 +28,10 @@
 				method='post' action="{% block form_action %}{% endblock %}"
 				enctype="{% block form_enctype %}application/x-www-form-urlencoded{% endblock %}">
 				{% csrf_token %}
-		
+
+				{% block info %}
+				{% endblock %}
+
 				{% for error in form.non_field_errors %}
 					<div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
 						{{ error }} 
@@ -50,7 +53,7 @@
 					{% endfor %}
 				{% endfor %}
 				<div class='text-center p-2'>
-					<button type='submit' class='btn btn-success py-1 px-2'>
+					<button type='submit' class='btn btn-primary py-1 px-2'>
 						{% block submit_value %}{% endblock %}
 					</button>
 				</div>
