@@ -1,10 +1,11 @@
 from django.views.generic.list import ListView
-from django.views.generic.base import RedirectView
+from django.views.generic.base import RedirectView, View
 from django.views.generic.edit import FormView, CreateView, UpdateView
 
 from django import forms
 from django.urls import reverse_lazy
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
+from django.http import HttpResponse
 
 from .models import URL, UserProfile
 from .forms import URLForm
@@ -36,14 +37,10 @@ class DashboardView(ListView):
         return self.request.user.urls.order_by('-visits')
 
 
-class AddURLView(FormView):
+class AddURLView(CreateView):
     template_name = 'URLshortener/add_url.html'
-    form_class = URLForm
-
-    def get_context_data(self):
-        context = super().get_context_data()
-        context['added'] = False
-        return context
+    model = URL
+    fields = ['label', 'address']
 
     def form_valid(self, form):
         url_obj = form.save(commit=False)
@@ -51,12 +48,8 @@ class AddURLView(FormView):
         url_obj.author = self.request.user
         url_obj.save()
         context = self.get_context_data()
-        context['added'] = True
-        context['form'].fields['shortened_url'].initial = str(url_obj)
+        context['shortened_url'] = str(url_obj)
         return self.render_to_response(context)
-
-    def form_invalid(self, form):
-        return self.render_to_response(self.get_context_data())
 
 
 class ProfileView(CreateView):

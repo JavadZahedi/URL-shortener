@@ -1,71 +1,42 @@
 {% extends 'URLshortener/base_form.html' %}
+{% load static %}
 
 {% block head %} <title>Add URL</title> {% endblock %}
 
 {% block form_title %}اضافه کردن URL {% endblock %}
 
-{% block form_body %}
-    <form id='add-url' class='mx-auto p-2' method='post' action="{% url 'URLshortener:add-url' %}">
-        {% csrf_token %}
+{% block form_id %}add-url{% endblock %}
 
-        {% for error in form.non_field_errors %}
-            <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
-                {{ error }} 
-                <button type="button" class="close float-left" data-dismiss="alert">&times; </button>
-            </div>
-        {% endfor %}
+{% block form_action %}{% url 'URLshortener:add-url' %}{% endblock %}
 
-        {% for field in form.visible_fields %}
-            {% if field != form.shortened_url %}
-                <div class='row p-1'>
-                    <div class='col-sm-5 text-right px-2'>{{ field.label_tag }}</div>
-                    <div class='col-sm-7 text-center px-2'>{{ field }}</div>
-                </div>
-                
-                {% for error in field.errors %}
-                    <div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
-                        {{ error }} 
-                        <button type="button" class="close float-left" data-dismiss="alert">&times; </button>
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endfor %}
-        
-        {% if added %}
-            <div class='p-2'>
-                <div class='text-right p-0'>{{ form.shortened_url.label_tag }}</div>
-                <div class='row'>
-                    <div id='shortened-url' class='col-sm-8 px-1'>{{ form.shortened_url }}</div>
-                    <div class='col-sm-4 px-1'>
-                        <input id='copy-btn' type='button' value='کپی کردن'
-                        class='btn btn-primary btn-block p-0'>
-                    </div>
-                </div>
-            </div>
-            
-            <div class='text-right text-white'>
-                <span>رفتن به: </span> <br>
-                <a class='btn btn-info m-1' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
-                <br>
-                <a class='btn btn-info m-1' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
-                <br>
-                <a class='btn btn-info m-1' href="{% url 'URLshortener:add-url' %}">کوتاه کردن نشانی دیگر</a>
-            </div>
-        {% else %}
-            <div class='text-center p-2'>
-                <button type='submit' class='btn btn-primary py-1 px-2'>کوتاه کردن</button>
-            </div>
-        {% endif %}
-    </form>
+{% block submit_btn %}
+    {% if not shortened_url %}
+        <button id='submit' type='submit' class='btn btn-primary py-1 px-2'>کوتاه کردن</button>
+    {% endif %}
+{% endblock %}
 
-    <script>
-        $(function() {
-            $('#copy-btn').click(function() {
-                var $field = $('#id_shortened_url');
-                $field.select();
-                //$field.setSelectionRange(0, 99999);
-                document.execCommand("copy");
-            })
-        })
-    </script>
+
+{% block additional_content %}
+    {% if shortened_url %}
+        <div class='p-1 text-center'>
+            <div class='text-right text-white p-1'>آدرس کوتاه شده:</div>
+            <input class='text-left d-block' id='shortened-url' type="url" maxlength="512"
+                value='{{ shortened_url }}' readonly>
+            <button id='copy-btn' class='btn btn-primary m-2'>کپی کردن آدرس</button>
+        </div>
+
+        <div class='text-right text-white'>
+            <span>رفتن به: </span>
+            <br>
+            <a class='btn btn-info m-1' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
+            <br>
+            <a class='btn btn-info m-1' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
+            <br>
+            <a class='btn btn-info m-1' href="{% url 'URLshortener:add-url' %}">کوتاه کردن نشانی دیگر</a>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block js_links %}
+    <script src='{% static "URLshortener/js/add_url.js" %}'></script>
 {% endblock %}

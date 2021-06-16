@@ -25,15 +25,33 @@
                 </div>
                 <div class='row p-2'>
                     <div class='col-sm-5'>نام:</div>
-                    <div class='col-sm-7'>{{ user.first_name }}</div>
+                    <div class='col-sm-7'>
+                        {% if user.first_name %}
+                            {{ user.first_name }}
+                        {% else %}
+                            ثبت نشده
+                        {% endif %}
+                    </div>
                 </div>
                 <div class='row p-2'>
                     <div class='col-sm-5'>نام خانوادگی:</div>
-                    <div class='col-sm-7'>{{ user.last_name }}</div>
+                    <div class='col-sm-7'>
+                        {% if user.last_name %}
+                            {{ user.last_name }}
+                        {% else %}
+                            ثبت نشده
+                        {% endif %}
+                    </div>
                 </div>
                 <div class='row p-2'>
                     <div class='col-sm-5'>تاریخ تولد:</div>
-                    <div class='col-sm-7'>{{ user.profile.birth_date_jalali }}</div>
+                    <div class='col-sm-7'>
+                        {% if user.profile.birth_date %}
+                            {{ user.profile.birth_date_jalali }}
+                        {% else %}
+                            ثبت نشده
+                        {% endif %}
+                    </div>
                 </div>
                 <div class='row p-2'>
                     <div class='col-sm-5'>ایمیل:</div>

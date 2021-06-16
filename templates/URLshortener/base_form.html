@@ -53,17 +53,23 @@
 					{% endfor %}
 				{% endfor %}
 				<div class='text-center p-2'>
-					<button type='submit' class='btn btn-primary py-1 px-2'>
+					{% block submit_btn %}
+					<button id='submit' type='submit' class='btn btn-primary py-1 px-2'>
 						{% block submit_value %}{% endblock %}
 					</button>
+					{% endblock %}
 				</div>
-				{% block additional_content %}
-				{% endblock %}
 			</form>
+		{% endblock %}
+
+		{% block additional_content %}
 		{% endblock %}
 		</div>
 
 	</main>
+
+	{% block js_links %}
+	{% endblock %}
     
 </body>
 </html>
