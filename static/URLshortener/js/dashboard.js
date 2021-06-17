@@ -1,5 +1,9 @@
 $(function(){
     $('#delete-photo').click(function(){
-        //alert('OK');
+        $('#overlay').removeClass('d-none');
+    });
+
+    $('#close, #no').click(function(){
+    	$('#overlay').addClass('d-none');
     });
 });

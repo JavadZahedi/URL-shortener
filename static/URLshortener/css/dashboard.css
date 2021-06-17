@@ -21,3 +21,32 @@
     font-family: Shabnam;
     background-color: #77777757;
 }
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #353535da;
+    z-index: 10;
+}
+
+.close-btn {
+    font-size: 45px;
+    cursor: pointer;
+    position: absolute;
+    top: 2vw;
+    right: 2vw;
+    color: #a8b8b6;
+}
+
+.close-btn:hover {
+    color: #ddcdcb;
+}
+
+.overlay-content {
+    max-width: 300px;
+    margin-top: 20%;
+    font-family: Shabnam;
+}
