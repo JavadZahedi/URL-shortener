@@ -46,13 +46,7 @@
                 </div>
                 <div class='row p-2'>
                     <div class='col-sm-5'>تاریخ تولد:</div>
-                    <div class='col-sm-7'>
-                        {% if user.profile.birth_date %}
-                            {{ user.profile.birth_date_jalali }}
-                        {% else %}
-                            ثبت نشده
-                        {% endif %}
-                    </div>
+                    <div class='col-sm-7'>{{ user.profile.birth_date_jalali }}</div>
                 </div>
                 <div class='row p-2'>
                     <div class='col-sm-5'>ایمیل:</div>
