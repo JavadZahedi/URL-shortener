@@ -30,6 +30,14 @@ input, textarea {
 
 input:focus, textarea:focus {
     outline: none;
-    border: 1px solid #101c33;
-    background-color: #e7e7e7;
+    border: 2px solid #1a2a85;
+    background-color: #cacdff;
+}
+
+input[type='email'], input[type='url'] {
+    text-align: left;
+}
+
+input[type='checkbox'] {
+    width: initial;
 }

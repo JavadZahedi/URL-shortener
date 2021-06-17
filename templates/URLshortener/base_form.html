@@ -33,9 +33,9 @@
 				{% endblock %}
 
 				{% for error in form.non_field_errors %}
-					<div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
-						{{ error }} 
+					<div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>	
 						<button type="button" class="close float-left" data-dismiss="alert">&times; </button>
+						{{ error }}
 					</div>
 				{% endfor %}
 		
@@ -47,8 +47,8 @@
 					
 					{% for error in field.errors %}
 						<div class='alert alert-danger alert-dismissable text-right small p-2 my-1 mx-auto'>
-							{{ error }} 
 							<button type="button" class="close float-left" data-dismiss="alert">&times; </button>
+							{{ error }}
 						</div>
 					{% endfor %}
 				{% endfor %}

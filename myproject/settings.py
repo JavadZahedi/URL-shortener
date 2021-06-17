@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'URLshortener.apps.UrlshortenerConfig',
     'extensions',
     'registration',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [

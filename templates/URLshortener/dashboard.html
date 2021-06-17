@@ -13,6 +13,7 @@
         <div class='col-sm-3 p-2 text-center'>
             {% if user.profile.photo %}
             <img class='w-100 rounded-circle img-thumbnail' src='{{ user.profile.photo.url }}'>
+            <a href='{% url "URLshortener:delete-photo" %}' class='btn btn-success m-1'>حذف تصویر</a>
             {% else %}
             <img class='w-100 rounded-circle img-thumbnail' src='{% static "URLshortener/images/user_avatar.png" %}'>
             {% endif %}
@@ -58,6 +59,16 @@
                     <div class='col-sm-7'>{{ user.email }}</div>
                 </div>
                 <div class='row p-2'>
+                    <div class='col-sm-5'>وب سایت:</div>
+                    <div class='col-sm-7'>
+                        {% if user.profile.website %}
+                            {{ user.profile.website }}
+                        {% else %}
+                            ثبت نشده
+                        {% endif %}
+                    </div>
+                </div>
+                <div class='row p-2'>
                     <div class='col-sm-5'>تعداد نشانی های کوتاه شده:</div>
                     <div class='col-sm-7'>{{ page_obj.paginator.count|to_persian }}</div>
                 </div>
@@ -72,7 +83,7 @@
             <ul class='nav flex-column text-center text-white p-0 m-0 rounded border'>
                 <li class="nav-item p-2"><a class='d-block' href="{% url 'URLshortener:home' %}" >صفحه اصلی</a></li>
                 <li class="nav-item p-2"><a class='d-block' href="{% url 'URLshortener:add-url' %}" >اضافه کردن نشانی</a></li>
-                <li class="nav-item p-2"><a class='d-block' href="{% url 'URLshortener:edit-profile' %}" >تغییر اطلاعات</a></li>
+                <li class="nav-item p-2"><a class='d-block' href="{% url 'URLshortener:edit-profile' %}" >ویرایش اطلاعات</a></li>
                 <li class="nav-item p-2"><a class='d-block' href="{% url 'auth_logout' %}?next=/" >خروج</a></li>
             </ul>
         </aside>
@@ -84,7 +95,7 @@
                 </div>
             {% else %}
                 <div class='alert alert-info text-right p-2 m-2 mx-auto'>
-                    هنوز هیچ نشانی ای توسط اضافه نشده است!
+                    هنوز هیچ نشانی ای توسط شما اضافه نشده است!
                 </div>
             {% endif %}
 

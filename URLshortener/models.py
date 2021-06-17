@@ -45,11 +45,11 @@ class URL(models.Model):
 class UserProfile(models.Model):
     photo = models.ImageField(upload_to='profile_images', blank=True, verbose_name='تصویر')
     birth_date = models.DateField(null=True, blank=True, verbose_name='تاریخ تولد')
-    website = models.URLField(blank=True, verbose_name='وب سایت')
+    website = models.URLField(null=True, blank=True, verbose_name='وب سایت')
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
 
     def birth_date_jalali(self):
-        return date_to_jalali_str(self.birth_date)
+        return date_to_jalali_str(self.birth_date) if self.birth_date else 'ثبت نشده'
     birth_date_jalali.short_description = 'تاریخ تولد'
 
     def __str__(self):
