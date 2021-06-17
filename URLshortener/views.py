@@ -25,6 +25,10 @@ class HomeView(ListView):
     template_name = 'URLshortener/home.html'
 
 
+class AboutUsView(TemplateView):
+    template_name = 'URLshortener/about_us.html'
+
+
 class URLRedirectView(RedirectView):
     permanant = True
     

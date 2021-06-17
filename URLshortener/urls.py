@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 app_name = 'URLshortener'
 urlpatterns = [
     path('', views.HomeView.as_view(), name='home'),
+    path('about-us/', views.AboutUsView.as_view(), name='about-us'),
     path('shortened-url/<slug:slug>', views.URLRedirectView.as_view(), name='shortened-url'),
     path('dashboard/', views.DashboardView.as_view(), name='dashboard'),
     path('add-url/', views.AddURLView.as_view(), name='add-url'),

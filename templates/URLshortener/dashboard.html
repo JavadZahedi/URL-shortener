@@ -13,7 +13,8 @@
         <div class='col-sm-3 p-2 text-center'>
             {% if user.profile.photo %}
             <img class='w-100 rounded-circle img-thumbnail' src='{{ user.profile.photo.url }}'>
-            <a href='{% url "URLshortener:delete-photo" %}' class='btn btn-success m-1'>حذف تصویر</a>
+            <a id='delete-photo' href='{% url "URLshortener:delete-photo" %}'
+                class='btn btn-success m-1'>حذف تصویر</a>
             {% else %}
             <img class='w-100 rounded-circle img-thumbnail' src='{% static "URLshortener/images/user_avatar.png" %}'>
             {% endif %}
