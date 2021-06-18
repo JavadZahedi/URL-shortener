@@ -93,8 +93,9 @@ class EditProfileView(LoginRequiredMixin, View):
 
     def get_context_data(self):
         context = {
-            'user_form': UserForm(instance=self.request.user),
-            'profile_form': UserProfileForm(instance=self.request.user.profile),
+            'user_form': UserForm(self.request.POST or None, instance=self.request.user),
+            'profile_form': UserProfileForm(self.request.POST or None, 
+                self.request.FILES or None, instance=self.request.user.profile),
         }
         return context
 
@@ -102,16 +103,11 @@ class EditProfileView(LoginRequiredMixin, View):
         return render(request, self.template_name, self.get_context_data())
 
     def post(self, request):
-        user_form = UserForm(request.POST, instance=request.user)
-        profile_form = UserProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        context = self.get_context_data()
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
+        if context['user_form'].is_valid() and context['profile_form'].is_valid():
+            context['user_form'].save()
+            context['profile_form'].save()
             return redirect('URLshortener:dashboard')
         else:
-            context = {
-                'user_form': user_form,
-                'profile_form': profile_form,
-            }
             return render(request, self.template_name, context)

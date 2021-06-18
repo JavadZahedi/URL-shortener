@@ -16,7 +16,7 @@
                 <br>
                 <a class='btn btn-light py-1 m-1' href="{% url 'URLshortener:home' %}">صفحه اصلی</a>
                 <br>
-                {% if user.authenticated %}
+                {% if user.is_authenticated %}
                 <a class='btn btn-light py-1 m-1' href="{% url 'URLshortener:dashboard' %}">پنل کاربری</a>
                 <br>
                 <a class='btn btn-light py-1 m-1' href="{% url 'URLshortener:add-url' %}">کوتاه کردن نشانی</a>
