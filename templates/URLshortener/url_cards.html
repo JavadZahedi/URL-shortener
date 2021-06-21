@@ -30,7 +30,7 @@
             <hr class='m-1'>
             <div class='container-fluid text-center url-delete'>
                 <a label='{{ short_url.label }}' address='{{ short_url }}'
-                    request_url="{% url 'URLshortener:delete-url' short_url.slug %}?next={{request.path}}&page={{page.number}}&has_next={{page.has_next}}&rem_urls={{page|length}}"
+                    request_url="{% url 'URLshortener:delete-url' short_url.slug %}?next={{request.path}}&page={{page.number}}&rem_urls={{page|length}}"
                     class='btn btn-danger py-0 delete-url'>حذف</a>
             </div>
         {% endif %}

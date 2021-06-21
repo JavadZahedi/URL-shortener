@@ -72,19 +72,12 @@ class DeleteURLView(LoginRequiredMixin, View):
     def get_redirect_url(self):
         next_url = self.request.GET.get('next')
         page_num = int(self.request.GET.get('page', 1))
-        has_next_page = self.request.GET.get('has_next')
-        rem_urls = int(self.request.GET.get('rem_urls', 2))
+        rem_urls = int(self.request.GET.get('rem_urls', 1))
 
-        dashboard_url = reverse('URLshortener:dashboard')
-        home_url = reverse('URLshortener:home')
-
-        if next_url == home_url or next_url == dashboard_url:
-            if rem_urls == 1 and has_next_page == 'False' and page_num > 1:
-                return '{}?page={}'.format(next_url, page_num - 1)
-            else:
-                return '{}?page={}'.format(next_url, page_num)
+        if rem_urls == 1 and page_num > 1:
+            return '{}?page={}'.format(next_url, page_num - 1)
         else:
-            return dashboard_url
+            return '{}?page={}'.format(next_url, page_num)
 
 
 class ProfileView(LoginRequiredMixin, CreateView):
