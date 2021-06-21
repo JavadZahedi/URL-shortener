@@ -99,13 +99,13 @@
         </div>
     </div>
 
-    <div id="overlay" class="text-right d-none overlay">
-        <span id='close' class="p-0 m-0 close-btn">&#x2715;</span>
+    <div id="delete-photo-overlay" class="text-right d-none overlay">
+        <span id='close-delete-photo' class="p-0 m-0 close-btn">&#x2715;</span>
         <div class="card p-3 text-center mx-auto overlay-content">
             <div>تصویر پروفایل حذف شود؟</div>
             <div class='text-center m-2'>
-                <a id='yes' href="{% url 'URLshortener:delete-photo' %}" class='btn btn-success py-1'>بله</a>
-                <button id='no' class='btn btn-danger py-1'>خیر</button>
+                <a href="{% url 'URLshortener:delete-photo' %}" class='btn btn-success py-1'>بله</a>
+                <button id='cancel-delete-photo' class='btn btn-danger py-1'>خیر</button>
             </div>
         </div>
     </div>
@@ -113,4 +113,5 @@
 
 {% block js_links %}
     <script src="{% static 'URLshortener/js/dashboard.js' %}"></script>
+    <script src="{% static 'URLshortener/js/url_cards.js' %}"></script>
 {% endblock %}

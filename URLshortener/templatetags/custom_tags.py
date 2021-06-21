@@ -8,9 +8,10 @@ def paginator(page):
         'page': page,
     }
 
-@register.inclusion_tag('URLshortener/url_cards.html')
-def url_cards(page):
+@register.inclusion_tag('URLshortener/url_cards.html', takes_context=True)
+def url_cards(context, page):
     return {
+        'request': context['request'],
         'page': page,
     }
 

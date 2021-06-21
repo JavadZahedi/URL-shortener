@@ -1,6 +1,6 @@
 from django.views.generic.list import ListView
 from django.views.generic.base import View, TemplateView, RedirectView
-from django.views.generic.edit import FormView, CreateView, UpdateView
+from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django import forms
@@ -20,7 +20,8 @@ import os
 # Create your views here.
 
 class HomeView(ListView):
-    queryset = URL.objects.order_by('-visits')
+    model = URL
+    ordering = '-visits'
     paginate_by = 10
     template_name = 'URLshortener/home.html'
 
@@ -59,6 +60,31 @@ class AddURLView(LoginRequiredMixin, CreateView):
         context = self.get_context_data()
         context['shortened_url'] = str(url_obj)
         return self.render_to_response(context)
+
+
+class DeleteURLView(LoginRequiredMixin, View):
+    def get(self, request, slug):
+        url_obj = get_object_or_404(URL, slug=slug, author=request.user)
+        url_obj.delete()
+        redirect_url = self.get_redirect_url()
+        return redirect(redirect_url)
+
+    def get_redirect_url(self):
+        next_url = self.request.GET.get('next')
+        page_num = int(self.request.GET.get('page', 1))
+        has_next_page = self.request.GET.get('has_next')
+        rem_urls = int(self.request.GET.get('rem_urls', 2))
+
+        dashboard_url = reverse('URLshortener:dashboard')
+        home_url = reverse('URLshortener:home')
+
+        if next_url == home_url or next_url == dashboard_url:
+            if rem_urls == 1 and has_next_page == 'False' and page_num > 1:
+                return '{}?page={}'.format(next_url, page_num - 1)
+            else:
+                return '{}?page={}'.format(next_url, page_num)
+        else:
+            return dashboard_url
 
 
 class ProfileView(LoginRequiredMixin, CreateView):

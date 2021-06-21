@@ -26,6 +26,26 @@
             {{ short_url }}
         </a>
 
+        {% if short_url.author == request.user %}
+            <hr class='m-1'>
+            <div class='container-fluid text-center url-delete'>
+                <a label='{{ short_url.label }}' address='{{ short_url }}'
+                    request_url="{% url 'URLshortener:delete-url' short_url.slug %}?next={{request.path}}&page={{page.number}}&has_next={{page.has_next}}&rem_urls={{page|length}}"
+                    class='btn btn-danger py-0 delete-url'>حذف</a>
+            </div>
+        {% endif %}
+
     </div>
     {% endfor %}
+</div>
+
+<div id="delete-url-overlay" class="text-right d-none overlay">
+    <span id='close-delete-url' class="p-0 m-0 close-btn">&#x2715;</span>
+    <div class="card p-3 text-center mx-auto overlay-content">
+        <div id='delete-url-message'></div>
+        <div class='text-center m-2'>
+            <a id='delete-url-confirm' class='btn btn-success py-1'>بله</a>
+            <button id='cancel-delete-url' class='btn btn-danger py-1'>خیر</button>
+        </div>
+    </div>
 </div>
