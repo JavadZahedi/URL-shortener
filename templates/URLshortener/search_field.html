@@ -1,0 +1,18 @@
+<div class='container-fluid text-center mx-auto my-0 p-2 search-box'>
+    <form class='row w-100 p-0 m-0' method='get' action='{{ request.path }}'>
+        <input id='search-field' name='search_key' type='text'
+            placeholder='عنوان یا کد یکتای ۸ رقمی را جست و جو کنید'
+            class='d-block col-10 p-1 m-0 rounded' url='{% url "URLshortener:search-dropdown" %}'
+            search_page='{{ search_page }}' required>
+        
+        <button id='search-btn' class='btn btn-block col-2 p-1 m-0 rounded bg-primary text-white search-btn' href=''>
+            <i style="font-size:20px"  class="fa">&#xf002;</i>
+        </button>
+    </form>
+    <div id='search-result' class='w-100 text-center p-0 m-0 search-result'></div>
+    {% if request.GET.search_key %}
+        <div class='text-right p-2 search-info'>
+            نتایج جست و جو برای "{{ request.GET.search_key }}"
+        </div>
+    {% endif %}
+</div>

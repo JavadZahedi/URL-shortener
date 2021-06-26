@@ -2,33 +2,39 @@
 
 <div class='container-fluid m-0 p-2 d-flex flex-row flex-wrap justify-content-center cards-div'>
     {% for short_url in page %}
-    <div class='card text-right m-2 p-2 url-card'>
+    <div class='card text-right m-1 p-1 url-card'>
         <h4 class='text-center p-0 m-0 url-number'>
             <span class='badge badge-pill badge-primary'>
                 {{ forloop.counter0|add:page.start_index|to_persian }}
             </span>
         </h4>
-        <hr class='m-1'>
+        <hr class='mt-1 mb-0'>
 
         <div class='p-1'>
             <span class='badge badge-info p-2'>{{ short_url.visits|to_persian }} بازدید</span>
             <span></span>
             <span class='badge badge-success p-2'>{{ short_url.label }}</span>
         </div>
-
-        <div class='p-1'>آخرین بازدید:</div>
-        <div class='text-center'>
-            <span class='badge badge-secondary p-2'>{{ short_url.last_visit_jalali }}</span>
+        <div class='row p-1 m-0'>
+            <div class='col-sm-4 m-0 p-0'>آخرین بازدید:</div>
+            <div class='col-sm-8 m-0 p-0 text-center'>
+                <span class='badge badge-secondary p-2'>{{ short_url.last_visit_jalali }}</span>
+            </div>
         </div>
 
-        <div class='p-1'>آدرس:</div>
-        <a class='btn btn-link d-block p-0' href="{% url 'URLshortener:shortened-url' short_url.slug %}">
-            {{ short_url }}
-        </a>
+        <div class='row p-1 m-0'>
+            <div class='col-sm-3 m-0 p-0'>آدرس:</div>
+            <div class='col-sm-9 m-0 p-0 text-center'>
+                <a class='btn btn-link btn-block p-1 m-0' href="{% url 'URLshortener:shortened-url' short_url.slug %}">
+                    {{ short_url }}
+                </a>
+            </div>
+        </div>
 
         {% if short_url.author == request.user %}
-            <hr class='m-1'>
+            <hr class='mt-0 mb-1'>
             <div class='container-fluid text-center url-delete'>
+                <a class='btn btn-dark py-0' href='{% url "URLshortener:edit-url" short_url.slug %}?next={{request.get_full_path}}'>ویرایش</a>
                 <a label='{{ short_url.label }}' address='{{ short_url }}'
                     request_url="{% url 'URLshortener:delete-url' short_url.slug %}?next={{request.path}}&page={{page.number}}&rem_urls={{page|length}}"
                     class='btn btn-danger py-0 delete-url'>حذف</a>

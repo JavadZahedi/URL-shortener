@@ -1,0 +1,23 @@
+{% load custom_filters %}
+<div class='dropdown-content p-0 m-0 w-100'>
+{% for url in url_list|slice:":5" %}
+    <div class='card m-0 p-0 search-item'>
+        <div class='row m-0 p-0'>
+            <div class='col-md-3 m-0 p-1 text-center'>
+                <span class='badge badge-success p-2'>{{ url.label }}</span>
+                <span class='badge badge-info p-2'>{{ url.visits|to_persian }} بازدید</span>
+            </div>
+            <div class='col-md-9 m-0 p-1 text-center'>
+                <a class='btn btn-link btn-block p-0 m-0' href="{% url 'URLshortener:shortened-url' url.slug %}">
+                    {{ url }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+    <div class='bg-light text-dark text-right p-1'>
+        <span class='p-1'>...</span>
+        <br>
+        <span class='p-1'>{{ url_list.count|to_persian }} مورد یافت شد</span>
+    </div>
+</div>

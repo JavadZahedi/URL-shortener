@@ -16,11 +16,11 @@ header {
 }
 
 .cards-div {
-    font-family: Sahel;
+    font-family: Shabnam;
 }
 
 .url-card {
-    max-width: 250px;
+    max-width: 300px;
 }
 
 .url-number {
@@ -54,4 +54,29 @@ header {
     max-width: 400px;
     margin-top: 20%;
     font-family: Shabnam;
+}
+
+.search-box {
+    font-size: 15px;
+    font-family: Shabnam;
+    width: 800px;
+    max-width: 100%;
+}
+
+.search-result {
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    box-shadow: 0 2px 7px gray;
+    border: 1px solid gray;
+    font-size: 14px;
+    z-index: 2;
+}
+
+.search-item {
+    border-bottom: 1px solid gray;
 }

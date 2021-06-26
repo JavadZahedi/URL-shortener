@@ -2,7 +2,7 @@
 <ul class="pagination justify-content-center flex-row-reverse flex-wrap p-0">
     {% if page.has_previous %}
         <li class="page-item"><a class="page-link" 
-            href="?page={{ page.previous_page_number }}">قبلی &#187;</a></li>
+            href="?page={{ page.previous_page_number }}&search_key={{request.GET.search_key}}">قبلی &#187;</a></li>
     {% else %}
         <li class="page-item disabled"><a class="page-link" href="#" >قبلی &#187;</a></li>
     {% endif %}
@@ -10,16 +10,16 @@
     {% for i in page.paginator.page_range %}
         {% if i == page.number %}
             <li class="page-item active"><a class="page-link" 
-                href="?page={{ i }}">{{ i|to_persian }}</a></li>
+                href="?page={{ i }}&search_key={{request.GET.search_key}}">{{ i|to_persian }}</a></li>
         {% else %}
             <li class="page-item"><a class="page-link" 
-                href="?page={{ i }}">{{ i|to_persian }}</a></li>
+                href="?page={{ i }}&search_key={{request.GET.search_key}}">{{ i|to_persian }}</a></li>
         {% endif %}
     {% endfor %}
     
     {% if page.has_next %}
         <li class="page-item"><a class="page-link" 
-            href="?page={{ page.next_page_number }}">&#171; بعدی</a></li>
+            href="?page={{ page.next_page_number }}&search_key={{request.GET.search_key}}">&#171; بعدی</a></li>
     {% else %}
         <li class="page-item disabled"><a class="page-link" href="#">&#171; بعدی</a></li>
     {% endif %}

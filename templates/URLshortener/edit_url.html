@@ -1,0 +1,27 @@
+{% extends 'URLshortener/base_form.html' %}
+{% load static %}
+
+{% block head %} <title>Edit URL</title> {% endblock %}
+
+{% block form_title %} ویرایش URL {% endblock %}
+
+{% block form_id %}edit-url{% endblock %}
+
+{% block form_action %}{% url 'URLshortener:edit-url' form.instance.slug %}?next={{request.GET.next}}{% endblock %}
+
+{% block submit_value %} ذخیره {% endblock %}
+
+{% block info %}
+    <div class='row p-1'>
+        <div class='col-sm-5 text-right text-white px-2'>آخرین بازدید:</div>
+        <div class='col-sm-7 text-center px-2'>
+            <span class='badge badge-info p-2'>{{ form.instance.last_visit_jalali }}</span>
+        </div>
+    </div>
+
+    <div class='text-center card p-1 my-2'>
+        <a class='btn btn-link btn-block p-0 m-0' href="{% url 'URLshortener:shortened-url' form.instance.slug %}">
+            {{ form.instance }}
+        </a>
+    </div>
+{% endblock %}

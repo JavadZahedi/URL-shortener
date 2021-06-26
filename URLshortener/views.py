@@ -1,3 +1,5 @@
+from django.db.models import Q
+from django.http.response import Http404
 from django.views.generic.list import ListView
 from django.views.generic.base import View, TemplateView, RedirectView
 from django.views.generic.edit import FormView, CreateView, UpdateView, DeleteView
@@ -16,14 +18,23 @@ import os
 
 # helper functions
 
+def search_urls(queryset, search_key):
+    if not search_key:
+        return queryset.order_by('-visits')
+    return queryset.filter(
+        Q(label__icontains=search_key) | Q(slug__icontains=search_key)
+    ).order_by('-visits')
 
 # Create your views here.
 
 class HomeView(ListView):
-    model = URL
-    ordering = '-visits'
     paginate_by = 10
     template_name = 'URLshortener/home.html'
+
+    def get_queryset(self):
+        key = self.request.GET.get('search_key')
+        queryset = URL.objects.all()
+        return search_urls(queryset, key)
 
 
 class AboutUsView(TemplateView):
@@ -44,7 +55,26 @@ class DashboardView(LoginRequiredMixin, ListView):
     template_name = 'URLshortener/dashboard.html'
 
     def get_queryset(self):
-        return self.request.user.urls.order_by('-visits')
+        key = self.request.GET.get('search_key')
+        queryset = self.request.user.urls
+        return search_urls(queryset, key)
+
+
+class SearchDropdownView(ListView):
+    template_name = 'URLshortener/search_dropdown.html'
+
+    def get_queryset(self):
+        key = self.request.GET.get('search_key')
+        search_page = self.request.GET.get('search_page')
+
+        if search_page == 'home':
+            queryset = URL.objects.all()
+        elif search_page == 'dashboard':
+            queryset = self.request.user.urls
+        else:
+            raise Http404()
+
+        return search_urls(queryset, key)
 
 
 class AddURLView(LoginRequiredMixin, CreateView):
@@ -60,6 +90,18 @@ class AddURLView(LoginRequiredMixin, CreateView):
         context = self.get_context_data()
         context['shortened_url'] = str(url_obj)
         return self.render_to_response(context)
+
+
+class EditURLView(LoginRequiredMixin, UpdateView):
+    template_name = 'URLshortener/edit_url.html'
+    model = URL
+    fields = ['label']
+
+    def get_object(self):
+        return get_object_or_404(URL, slug=self.kwargs['slug'], author=self.request.user)
+
+    def get_success_url(self):
+        return self.request.GET.get('next', reverse('URLshortener:home'))
 
 
 class DeleteURLView(LoginRequiredMixin, View):

@@ -34,10 +34,11 @@ input:focus, textarea:focus {
     background-color: #cacdff;
 }
 
-input[type='email'], input[type='url'] {
+input[type='email'], input[type='url'], textarea {
+    direction: ltr;
     text-align: left;
 }
 
-input[type='checkbox'] {
-    width: initial;
+textarea {
+    height: 150px;
 }

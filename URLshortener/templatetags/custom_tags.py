@@ -2,9 +2,10 @@ from django import template
 
 register = template.Library()
 
-@register.inclusion_tag('URLshortener/paginator.html')
-def paginator(page):
+@register.inclusion_tag('URLshortener/paginator.html', takes_context=True)
+def paginator(context, page):
     return {
+        'request': context['request'],
         'page': page,
     }
 
@@ -13,6 +14,13 @@ def url_cards(context, page):
     return {
         'request': context['request'],
         'page': page,
+    }
+
+@register.inclusion_tag('URLshortener/search_field.html', takes_context=True)
+def search_field(context, search_page):
+    return {
+        'request': context['request'],
+        'search_page': search_page,
     }
 
 @register.simple_tag
